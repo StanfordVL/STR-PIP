@@ -29,3 +29,24 @@ Behavior annotations specify behaviors for pedestrians that interact with or req
 **Annotation Data:** https://github.com/ykotseruba/JAAD
 
 **Full Dataset:** http://data.nvision2.eecs.yorku.ca/JAAD_dataset
+
+## Installation
+
+### Create your Virtual Environment
+```
+conda create --name crossing python=3.7
+conda activate crossing
+```
+
+### Install Required Libraries
+_TBC_
+
+
+### Clone this repo
+```
+git clone https://github.com/StanfordVL/STR-PIP.git
+cd STR-PIP
+```
+
+## Usage
+_TBC_
