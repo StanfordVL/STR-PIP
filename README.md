@@ -32,6 +32,10 @@ Behavior annotations specify behaviors for pedestrians that interact with or req
 
 ## Installation
 
+### Notes before running
+
+This training code is setup to be ran on a 16GB GPU. You may have to make some adjustments if you do not have this hardware available.
+
 ### Create your Virtual Environment
 ```
 conda create --name crossing python=3.7
