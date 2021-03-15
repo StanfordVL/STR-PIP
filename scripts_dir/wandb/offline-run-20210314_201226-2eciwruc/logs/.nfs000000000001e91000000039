@@ -1,0 +1,16 @@
+2021-03-14 20:12:27,342 INFO    MainThread:3357636 [internal.py:wandb_internal():91] W&B internal server running at pid: 3357636, started at: 2021-03-14 20:12:27.341321
+2021-03-14 20:12:27,344 DEBUG   HandlerThread:3357636 [handler.py:handle_request():101] handle_request: run_start
+2021-03-14 20:12:27,344 INFO    WriterThread:3357636 [datastore.py:open_for_write():77] open: /sailhome/agalczak/crossing/scripts_dir/wandb/offline-run-20210314_201226-2eciwruc/run-2eciwruc.wandb
+2021-03-14 20:12:27,351 DEBUG   HandlerThread:3357636 [meta.py:__init__():34] meta init
+2021-03-14 20:12:27,351 DEBUG   HandlerThread:3357636 [meta.py:__init__():48] meta init done
+2021-03-14 20:12:27,351 DEBUG   HandlerThread:3357636 [meta.py:probe():190] probe
+2021-03-14 20:12:27,369 DEBUG   HandlerThread:3357636 [meta.py:_setup_git():180] setup git
+2021-03-14 20:12:27,455 DEBUG   HandlerThread:3357636 [meta.py:_setup_git():187] setup git done
+2021-03-14 20:12:27,455 DEBUG   HandlerThread:3357636 [meta.py:_save_pip():52] save pip
+2021-03-14 20:12:27,460 DEBUG   HandlerThread:3357636 [meta.py:_save_pip():66] save pip done
+2021-03-14 20:12:27,461 DEBUG   HandlerThread:3357636 [meta.py:probe():231] probe done
+2021-03-14 20:22:28,964 WARNING MainThread:3357636 [internal.py:is_dead():344] Internal process exiting, parent pid 3357618 disappeared
+2021-03-14 20:22:28,965 ERROR   MainThread:3357636 [internal.py:wandb_internal():142] Internal process shutdown.
+2021-03-14 20:22:29,293 INFO    HandlerThread:3357636 [handler.py:finish():532] shutting down handler
+2021-03-14 20:22:29,295 INFO    WriterThread:3357636 [datastore.py:close():258] close: /sailhome/agalczak/crossing/scripts_dir/wandb/offline-run-20210314_201226-2eciwruc/run-2eciwruc.wandb
+2021-03-14 20:22:29,439 INFO    SenderThread:3357636 [sender.py:finish():814] shutting down sender

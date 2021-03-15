@@ -1,0 +1,41 @@
+# Slurm
+  Interactive jobs:
+    `srun --partition=mypartition --pty bash`
+  or with other parameters:
+    `srun --partition=mypartition --nodelist=node1 --gres=gpu:1 --mem=16G --pty bash`
+  
+  Batch jobs:
+    `sbatch my_script.sh`
+  
+  
+  Managing jobs:
+  - view a list of all jobs:
+    `squeue` or https://sc.stanford.edu
+  - view detailed information for a specific job:
+    `scontrol show job job_id`
+  - cancel a job:
+    `scancel "job_id"`
+
+
+  Storage:
+  - home directory: /sailhome/csid
+  - NFS: /vision
+  
+  Partitions:
+  - macondo [1-3]
+  - tibet [4-15]
+
+
+
+# Skicka -- interact w/ Google drive
+  skicka ls -l
+  skicka download /VLOG/full_256_part0.tar VLOG/
+
+
+
+# Connecting to TRI machine
+  * prerequisite:
+    * eval `ssh-agent -s`
+    * ssh-add ~/.ssh/id_tri
+  * connect:
+    * ssh -o ProxyCommand="ssh -W %h:%p ec2-user@54.211.33.206" ubuntu@10.237.6.201
