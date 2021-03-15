@@ -45,9 +45,11 @@ conda activate crossing
 ### Install Required Libraries
 ```
 pip install torchvision==0.5.0
-pip install wandb
 pip install opencv-python
 pip install pycocotools
+pip install pickle
+pip install numpy
+pip install wandb
 ```
 _TBC_
 
