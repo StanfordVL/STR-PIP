@@ -32,7 +32,7 @@ Behavior annotations specify behaviors for pedestrians that interact with or req
 
 ## Installation
 
-### Notes before running
+### Notes Before Running
 
 This training code is setup to be ran on a 16GB GPU. You may have to make some adjustments if you do not have this hardware available.
 
@@ -43,8 +43,13 @@ conda activate crossing
 ```
 
 ### Install Required Libraries
+```
+pip install torchvision==0.5.0
+pip install wandb
+pip install opencv-python
+pip install pycocotools
+```
 _TBC_
-
 
 ### Clone this repo
 ```
