@@ -54,3 +54,11 @@ cd STR-PIP
 
 ## Usage
 _TBC_
+
+
+## Current code status (3-14-21)
+
+* With the correct pre-processing, STIP training/testing works.
+* We are looking for some specific artifacts to train on JAAD. We are very close to generating the correct files.
+* This code base is in the process of clean-up, doc, and re-factor. There may be sudden changes. We will publish a new release when it is a more ready state.
+
