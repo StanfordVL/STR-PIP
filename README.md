@@ -51,7 +51,11 @@ pip install pickle
 pip install numpy
 pip install wandb
 ```
-_TBC_
+
+### Configure Environment Variables
+```
+export PYTHONPATH=$PYTHONPATH:[path-to-repo]
+```
 
 ### Clone this repo
 ```
