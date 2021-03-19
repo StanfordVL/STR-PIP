@@ -229,10 +229,10 @@ def parse_pedestrian(fxml, fpos_GT, fpos_pred='', fpose=''):
 
 def prepare_data():
   # object GT directory
-  obj_root = '/sailhome/agalczak/crossing/datasets/JAAD_instance_segm'
+  obj_root = '/sailhome/ajarno/STR-PIP/datasets/JAAD_instance_segm'
   fobj_dir_format = os.path.join(obj_root, 'video_{:04d}')
   # pedestrian GT files
-  #ped_root = '/sailhome/agalczak/crossing/datasets/JAAD_dataset/'
+  #ped_root = '/sailhome/ajarno/STR-PIP/datasets/JAAD_dataset/'
   ped_root = '/vision/u/caozj1995/data/JAAD_dataset/'
   fxml_format = os.path.join(ped_root, 'behavioral_data_xml', 'video_{:04d}.xml')
   fpose_format = os.path.join('/vision2/u/mangalam/JAAD/openpose_track_with_pose/', 'video_{:04d}.npy')
@@ -274,7 +274,7 @@ def prepare_data():
     return all_peds
 
 
-  annot_root = '/sailhome/agalczak/crossing/datasets/'
+  annot_root = '/sailhome/ajarno/STR-PIP/datasets/'
   # Train
   print('Processing training data...')
   train_range = range(1, 250+1)
@@ -298,9 +298,9 @@ def prepare_data():
 if __name__ == '__main__':
   if False:
     # test
-    fsegm = '/sailhome/bingbin/crossing/datasets/JAAD_instance_segm/video_0131/00000001_segm.npy'
+    fsegm = '/sailhome/bingbin/STR-PIP/datasets/JAAD_instance_segm/video_0131/00000001_segm.npy'
     parse_objs(fsegm)
-    # fxml = '/sailhome/bingbin/crossing/datasets/JAAD_dataset/behavioral_data_xml/video_0001.xml'
+    # fxml = '/sailhome/bingbin/STR-PIP/datasets/JAAD_dataset/behavioral_data_xml/video_0001.xml'
     # fpos = '/vision2/u/caozj/datasets/JAAD_dataset/bounding_box_python/vbb_part/video_0001.npy'
     # parse_pedestrian(fxml, fpos)
 

@@ -4,7 +4,7 @@ import pickle
 
 import pdb
 
-data_root = '/sailhome/agalczak/crossing/datasets/'
+data_root = '/sailhome/ajarno/STR-PIP/datasets/'
 img_root = os.path.join(data_root, 'JAAD_dataset/JAAD_clip_images')
 
 def count_frames():

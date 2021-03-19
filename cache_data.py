@@ -24,14 +24,14 @@ def cache_masks():
 
 
 def cache_crops():
-  fnpy_root = '/sailhome/bingbin/crossing/datasets/JAAD_instance_segm'
-  fpkl_root = '/sailhome/bingbin/crossing/datasets/cache/JAAD_instance_crops'
+  fnpy_root = '/sailhome/bingbin/STR-PIP/datasets/JAAD_instance_segm'
+  fpkl_root = '/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_instance_crops'
   utils.get_obj_crops(fnpy_root, fpkl_root)
 
 def add_obj_bbox():
-  fnpy_root = '/sailhome/bingbin/crossing/datasets/JAAD_instance_segm'
-  # fpkl_root = '/sailhome/bingbin/crossing/datasets/cache/jaad_collapse'
-  fobj_root = '/sailhome/bingbin/crossing/datasets/cache/obj_bbox'
+  fnpy_root = '/sailhome/bingbin/STR-PIP/datasets/JAAD_instance_segm'
+  # fpkl_root = '/sailhome/bingbin/STR-PIP/datasets/cache/jaad_collapse'
+  fobj_root = '/sailhome/bingbin/STR-PIP/datasets/cache/obj_bbox'
   os.makedirs(fobj_root, exist_ok=True)
   dir_vids = sorted(glob(os.path.join(fnpy_root, 'vid*')))
 
@@ -93,8 +93,8 @@ def merge_and_flat(vrange):
   """
   Merge fids in a vid and flatten the classes
   """
-  pkl_in_root = '/sailhome/bingbin/crossing/datasets/cache/obj_bbox'
-  pkl_out_root = '/sailhome/bingbin/crossing/datasets/cache/obj_bbox_merged'
+  pkl_in_root = '/sailhome/bingbin/STR-PIP/datasets/cache/obj_bbox'
+  pkl_out_root = '/sailhome/bingbin/STR-PIP/datasets/cache/obj_bbox_merged'
   os.makedirs(pkl_out_root, exist_ok=True)
   # for vid in range(1, 347):
   for vid in vrange:

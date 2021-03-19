@@ -12,7 +12,7 @@ bt=1
 slide=0
 rand_test=1
 log_every=10
-ckpt_dir='/sailhome/bingbin/crossing/ckpts'
+ckpt_dir='/sailhome/bingbin/STR-PIP/ckpts'
 dataset='JAAD'
 
 ckpt_name="baseline_anticipate_cnn_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt4_posNone_branchped_collapse0_combinepair_noGTAct_addDetLoss"
@@ -23,7 +23,7 @@ pred_seq_len=30
 
 load_cache='masks'
 # masks
-cache_format='/sailhome/bingbin/crossing/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
+cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
 
 which_epoch=-1
 if [ $which_epoch -eq -1 ]
@@ -37,7 +37,7 @@ save_output_format=$ckpt_dir'/'$dataset'/'$ckpt_name'/output_epoch'$epoch_name'_
 
 if [ "$mode" = "extract" ]
 then
-  extract_feats_dir='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-05_bt4_test_epoch5/test/'
+  extract_feats_dir='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-05_bt4_test_epoch5/test/'
 else
   extract_feats_dir='none_existent'
 fi

@@ -78,20 +78,20 @@ class BaseArgs:
     self.parser.add_argument('--split', type=str, required=True)
     self.parser.add_argument('--dset-name', type=str, default='JAAD')
     self.parser.add_argument('--annot-ped-format', type=str,
-                             # default='/sailhome/bingbin/crossing/datasets/annot_{}_ped.pkl',
-                             default='/sailhome/agalczak/crossing/datasets/annot_{}_ped_withTag_sanityWithPose.pkl',
+                             # default='/sailhome/bingbin/STR-PIP/datasets/annot_{}_ped.pkl',
+                             default='/sailhome/ajarno/STR-PIP/datasets/annot_{}_ped_withTag_sanityWithPose.pkl',
                              help='Format for the pkl file for parsed pedestrian annotations.')
     self.parser.add_argument('--annot-loc-format', type=str,
-                             default='/sailhome/agalczak/crossing/datasets/annot_{}_loc.pkl',
+                             default='/sailhome/ajarno/STR-PIP/datasets/annot_{}_loc.pkl',
                              help='Format for the pkl file for parsed location-centric annotations.')
     self.parser.add_argument('--img-path-format', type=str,
-                             default='/sailhome/agalczak/crossing/datasets/JAAD_dataset/JAAD_clip_images/video_{:04d}.mp4/{:d}.jpg')
+                             default='/sailhome/ajarno/STR-PIP/datasets/JAAD_dataset/JAAD_clip_images/video_{:04d}.mp4/{:d}.jpg')
     self.parser.add_argument('--fsegm-format', type=str,
-                             default='/sailhome/agalczak/crossing/datasets/JAAD_instance_segm/video_{:04d}/{:08d}_segm.npy')
+                             default='/sailhome/ajarno/STR-PIP/datasets/JAAD_instance_segm/video_{:04d}/{:08d}_segm.npy')
     # self.parser.add_argument('--fsegm-format-left', type=str, default='')
     # self.parser.add_argument('--fsegm-format-right', type=str, default='')
     self.parser.add_argument('--driver-act-format', type=str,
-                             default='/sailhome/agalczak/crossing/datasets/JAAD_dataset/JAAD_behavioral_encode/video_{:04d}/Driver.npy')
+                             default='/sailhome/ajarno/STR-PIP/datasets/JAAD_dataset/JAAD_behavioral_encode/video_{:04d}/Driver.npy')
     self.parser.add_argument('--save-cache-format', type=str, default='')
     # self.parser.add_argument('--save-cache-format-left', type=str, default='')
     # self.parser.add_argument('--save-cache-format-right', type=str, default='')
@@ -101,13 +101,13 @@ class BaseArgs:
     # self.parser.add_argument('--cache-format-left', type=str, default='')
     # self.parser.add_argument('--cache-format-right', type=str, default='')
     self.parser.add_argument('--cache-obj-bbox-format', type=str,
-                             default='/sailhome/agalczak/crossing/datasets/cache/obj_bbox_merged/vid{:08d}.pkl',
+                             default='/sailhome/ajarno/STR-PIP/datasets/cache/obj_bbox_merged/vid{:08d}.pkl',
                              help='Format for pkl files w/ keys: "obj_cls" and "obj_bbox".')
     # self.parser.add_argument('--cache-obj-bbox-format-left', type=str, default='')
     # self.parser.add_argument('--cache-obj-bbox-format-right', type=str, default='')
 
     # ckpt and logging
-    self.parser.add_argument('--ckpt-dir', type=str, default='/sailhome/agalczak/crossing/ckpts',
+    self.parser.add_argument('--ckpt-dir', type=str, default='/sailhome/ajarno/STR-PIP/ckpts',
                              help='the directory that contains all checkpoints')
     self.parser.add_argument('--ckpt-name', type=str, default='ckpt', help='checkpoint name')
     self.parser.add_argument('--ckpt-path', type=str, default='ckpt_path', help='placeholder for the real name.')
@@ -124,7 +124,7 @@ class BaseArgs:
 
   def parse(self):
     opt, _ = self.parser.parse_known_args()
-
+    print("I AM HERE")
     # opt.is_train, opt.split = self.is_train, self.split
     opt.is_train = self.is_train
     if opt.is_train:

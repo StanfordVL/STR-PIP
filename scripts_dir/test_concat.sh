@@ -15,7 +15,7 @@ pred_seq_len=30
 slide=0
 rand_test=1
 log_every=10
-ckpt_dir='/sailhome/bingbin/crossing/ckpts'
+ckpt_dir='/sailhome/bingbin/STR-PIP/ckpts'
 dataset='JAAD'
 
 split='test'
@@ -34,11 +34,11 @@ combine_method='pair'
 load_cache='masks'
 # load_cache='none'
 
-cache_format='/sailhome/bingbin/crossing/datasets/cache/jaad_collapse/{}/ped{}_fid{}.pkl'
+cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_collapse/{}/ped{}_fid{}.pkl'
 save_cache_format=$cache_format
 
-# cache_format='/sailhome/bingbin/crossing/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
-# cache_format='/sailhome/bingbin/crossing/datasets/cache/jaad_collapse/{}/ped{}_fid{}.pkl'
+# cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
+# cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_collapse/{}/ped{}_fid{}.pkl'
 
 # ckpt_name='concat_gru_lr1.0e-04_wd1.0e-05_bt4_ped_collapse0_combinepair_useBBox1_cacheMasks_fixGRU'
 # which_epoch=13
@@ -73,7 +73,7 @@ save_output_format=$ckpt_dir'/'$dataset'/'$ckpt_name'/output_epoch'$epoch_name'_
 
 if [ "$mode" = "extract" ]
 then
-  extract_feats_dir='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/'$ckpt_name'/'$split'/'
+  extract_feats_dir='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/'$ckpt_name'/'$split'/'
 else
   extract_feats_dir='none_existent'
 fi

@@ -17,7 +17,7 @@ predict_k=0
 slide=0
 rand_test=1
 log_every=10
-ckpt_dir='/sailhome/bingbin/crossing/ckpts'
+ckpt_dir='/sailhome/bingbin/STR-PIP/ckpts'
 dataset='JAAD'
 
 # pred 30
@@ -48,11 +48,11 @@ save_As_format=$ckpt_dir'/'$dataset'/'$ckpt_name'/test_graph_weights_epoch'$epoc
 
 
 load_cache='feats'
-# cache_format='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-04_wd1.0e-05_bt4_ped_collapse0_combinepair_useBBox0_cacheMasks_fixGRU_singleTime/{}/ped{}_fid{}.pkl'
-cache_format='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt4_posNone_branchboth_collapse0_combinepair_cacheMasks_fixGRU_eval3_9acts_noAct_sanityWithPose_withReLU_pedGRU/{}/ped{}_fid{}.pkl'
+# cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-04_wd1.0e-05_bt4_ped_collapse0_combinepair_useBBox0_cacheMasks_fixGRU_singleTime/{}/ped{}_fid{}.pkl'
+cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt4_posNone_branchboth_collapse0_combinepair_cacheMasks_fixGRU_eval3_9acts_noAct_sanityWithPose_withReLU_pedGRU/{}/ped{}_fid{}.pkl'
 
 
-# cache_format='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-05_bt4_test_epoch5/{}/ped{}_fid{}.pkl'
+# cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-05_bt4_test_epoch5/{}/ped{}_fid{}.pkl'
 
 # ckpt_name='graph_gru_lr1.0e-05_wd1.0e-05_bt16_ped_collapse0_combinepair_adjTypeembed_nLayers0_useBBox0_fixGRU'
 # which_epoch=50
@@ -68,7 +68,7 @@ cache_format='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/concat_g
 
 if [ "$mode" = "extract" ]
 then
-  extract_feats_dir='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-05_bt4_test_epoch5/test/'
+  extract_feats_dir='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-05_bt4_test_epoch5/test/'
 else
   extract_feats_dir='none_existent'
 fi

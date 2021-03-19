@@ -21,7 +21,7 @@ load_cache='masks'
 
 if [ $load_cache = 'feats' ]
 then
-  cache_root='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/'
+  cache_root='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/'
   cache_baseformat='/{}/ped{}_fid{}.pkl'
   # v3 feats
   cache_dir='concat_gru_seq14_pred1_lr1.0e-04_wd1.0e-05_bt4_posNone_branchped_collapse0_combinepair_cacheMasks_fixGRU_eval3_9acts_noAct_sanityWithPose_withReLU_ordered'
@@ -32,7 +32,7 @@ then
   # cache_format='imageNet_pretrained_singleTime'
   cache_format=$cache_root$cache_dir$cache_baseformat
 else
-  cache_format='/sailhome/bingbin/crossing/datasets/cache/jaad_collapse/{}/ped{}_fid{}.pkl'
+  cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_collapse/{}/ped{}_fid{}.pkl'
 fi
 
 

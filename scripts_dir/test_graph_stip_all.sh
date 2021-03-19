@@ -23,7 +23,7 @@ cache_obj_bbox_format='/vision/group/prolix/processed/'$view'/obj_bbox_20fps_mer
 slide=0
 rand_test=1
 log_every=10
-ckpt_dir='/sailhome/bingbin/crossing/ckpts'
+ckpt_dir='/sailhome/bingbin/STR-PIP/ckpts'
 dataset='STIP'
 
 if [ $seq_len -eq 8 ]
@@ -53,7 +53,7 @@ cache_format='/vision/group/prolix/processed/cache/'$view'/STIP_conv_feats/'$fea
 
 # if [ "$mode" = "extract" ]
 # then
-#   extract_feats_dir='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-05_bt4_test_epoch5/test/'
+#   extract_feats_dir='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-05_bt4_test_epoch5/test/'
 # else
 #   extract_feats_dir='none_existent'
 # fi

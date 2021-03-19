@@ -15,9 +15,9 @@ if MACHINE == 'TRI':
   test_video_out = 'ANN_hanh2_fps12_masked.mp4'
   test_annot = '/mnt/parallel/stip/annotation/20170907_prolix_trial_ANN_hanh2-09-07-2017_15-44-07.concat.12fps.mp4.json'
 else:
-  test_video_in = '/sailhome/bingbin/crossing/datasets/STIP/ANN_hanh2_downsampled.mkv'
+  test_video_in = '/sailhome/bingbin/STR-PIP/datasets/STIP/ANN_hanh2_downsampled.mkv'
   test_video_out = 'ANN_hanh2_fps12_masked.mp4'
-  test_annot = '/sailhome/bingbin/crossing/datasets/STIP/annotations/20170907_prolix_trial_ANN_hanh2-09-07-2017_15-44-07.concat.12fps.mp4.json'
+  test_annot = '/sailhome/bingbin/STR-PIP/datasets/STIP/annotations/20170907_prolix_trial_ANN_hanh2-09-07-2017_15-44-07.concat.12fps.mp4.json'
 
 
 def check_color(crossed):

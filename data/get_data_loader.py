@@ -184,7 +184,7 @@ def cache_all_objs(opt, cache_dir_name):
   opt.is_train = False
 
   opt.collapse_cls = 1
-  cache_dir_root = '/sailhome/agalczak/crossing/datasets/cache/'
+  cache_dir_root = '/sailhome/ajarno/STR-PIP/datasets/cache/'
   cache_dir = os.path.join(cache_dir_root, cache_dir_name)
   os.makedirs(cache_dir, exist_ok=True)
   opt.save_cache_format = os.path.join(cache_dir, opt.split, 'ped{}_fid{}.pkl')
@@ -207,8 +207,8 @@ def cache_all_objs(opt, cache_dir_name):
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('--dset-name', type=str, default='JAAD_loc')
-  parser.add_argument('--annot-ped-format', type=str, default='/sailhome/agalczak/crossing/datasets/annot_{}_ped.pkl')
-  parser.add_argument('--annot-loc-format', type=str, default='/sailhome/agalczak/crossing/datasets/annot_{}_loc.pkl')
+  parser.add_argument('--annot-ped-format', type=str, default='/sailhome/ajarno/STR-PIP/datasets/annot_{}_ped.pkl')
+  parser.add_argument('--annot-loc-format', type=str, default='/sailhome/ajarno/STR-PIP/datasets/annot_{}_loc.pkl')
   parser.add_argument('--is-train', type=int, default=1)
   parser.add_argument('--split', type=str, default='train')
   parser.add_argument('--seq-len', type=int, default=30)
@@ -217,9 +217,9 @@ if __name__ == '__main__':
   parser.add_argument('--collapse-cls', type=int, default=0,
                       help='Whether to merge the classes. If 1 then each item in masks is a dict keyed by cls, otherwise a list.')
   parser.add_argument('--img-path-format', type=str,
-                      default='/sailhome/agalczak/crossing/datasets/JAAD_dataset/JAAD_clip_images/video_{:04d}.mp4/{:d}.jpg')
+                      default='/sailhome/ajarno/STR-PIP/datasets/JAAD_dataset/JAAD_clip_images/video_{:04d}.mp4/{:d}.jpg')
   parser.add_argument('--fsegm-format', type=str,
-                      default='/sailhome/agalczak/crossing/datasets/JAAD_instance_segm/video_{:04d}/{:08d}_segm.npy')
+                      default='/sailhome/ajarno/STR-PIP/datasets/JAAD_instance_segm/video_{:04d}/{:08d}_segm.npy')
   parser.add_argument('--save-cache-format', type=str, default='')
   parser.add_argument('--cache-format', type=str, default='')
   parser.add_argument('--batch-size', type=int, default=4)
@@ -231,10 +231,10 @@ if __name__ == '__main__':
   parser.add_argument('--combine-method', type=str, default='none')
   parser.add_argument('--load-cache', type=str, default='masks')
   parser.add_argument('--cache-obj-bbox-format', type=str,
-                             default='/sailhome/agalczak/crossing/datasets/cache/obj_bbox_merged/vid{:08d}.pkl')
+                             default='/sailhome/ajarno/STR-PIP/datasets/cache/obj_bbox_merged/vid{:08d}.pkl')
 
   opt = parser.parse_args()
-  opt.save_cache_format = '/sailhome/agalczak/crossing/datasets/cache/jaad_loc/{}/vid{}_fid{}.pkl'
+  opt.save_cache_format = '/sailhome/ajarno/STR-PIP/datasets/cache/jaad_loc/{}/vid{}_fid{}.pkl'
   opt.cache_format = opt.save_cache_format
   opt.seq_len = 1
   opt.split = 'test'

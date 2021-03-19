@@ -19,7 +19,7 @@ pred_seq_len=30
 
 load_cache='pos'
 # masks
-cache_format='/sailhome/bingbin/crossing/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
+cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
 
 use_gru=1
 branch='both'

@@ -20,13 +20,13 @@ predict=1
 pred_seq_len=30
 predict_k=0
 
-annot_loc_format='/sailhome/agalczak/crossing/datasets/annot_{}_loc.pkl'
+annot_loc_format='/sailhome/ajarno/STR-PIP/datasets/annot_{}_loc.pkl'
 
 load_cache='masks'
-cache_format='/sailhome/agalczak/crossing/datasets/cache/jaad_loc/{}/ped{}_fid{}.pkl'
+cache_format='/sailhome/ajarno/STR-PIP/datasets/cache/jaad_loc/{}/ped{}_fid{}.pkl'
 save_cache_format=$cache_format
 
-pretrained_path='/sailhome/agalczak/crossing/ckpts/JAAD_loc/loc_concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt1_posNone_branchboth_collapse0_combinepair_tmp/best_pred.pth'
+pretrained_path='/sailhome/ajarno/STR-PIP/ckpts/JAAD_loc/loc_concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt1_posNone_branchboth_collapse0_combinepair_tmp/best_pred.pth'
 
 
 use_gru=1

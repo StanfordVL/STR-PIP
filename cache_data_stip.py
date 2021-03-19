@@ -27,8 +27,8 @@ import pdb
 # 
 # 
 # def cache_crops():
-#   fnpy_root = '/sailhome/bingbin/crossing/datasets/JAAD_instance_segm'
-#   fpkl_root = '/sailhome/bingbin/crossing/datasets/cache/JAAD_instance_crops'
+#   fnpy_root = '/sailhome/bingbin/STR-PIP/datasets/JAAD_instance_segm'
+#   fpkl_root = '/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_instance_crops'
 #   utils.get_obj_crops(fnpy_root, fpkl_root)
 
 def add_obj_bbox(view=''):

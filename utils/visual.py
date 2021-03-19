@@ -21,7 +21,7 @@ if MACHINE == 'TRI':
   subdir_format_png = os.path.join(stip_root, 'stip_instances', '{}/rgb/{}')
 else:
   # on Stanford CS servers
-  stip_root = '/vision2/u/bingbin/crossing/STIP'
+  stip_root = '/vision2/u/bingbin/STR-PIP/STIP'
   annot_root = os.path.join(stip_root, 'annotations')
   subdir_format_png = os.path.join(stip_root, 'rgb', '{}/{}')
 

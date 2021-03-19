@@ -148,7 +148,7 @@ def smooth_hold_lastObserve(fpkl):
 
 def smooth_wrapper():
   # ped-centric model
-  ckpt_dir = '/sailhome/bingbin/crossing/ckpts/JAAD/'
+  ckpt_dir = '/sailhome/bingbin/STR-PIP/ckpts/JAAD/'
   # ckpt_name = 'graph_gru_seq30_pred30_lr1.0e-05_wd1.0e-05_bt16_posNone_branchped_collapse0_combinepair_adjTypeembed_nLayers2_v2Feats'
   # label_name = 'label_epochbest_det_stepall.pkl'
   ckpt_name = 'graph_gru_seq30_pred30_lr3.0e-04_wd1.0e-05_bt16_posNone_branchboth_collapse0_combinepair_adjTypespatial_nLayers2_v4Feats_pedGRU_3evalEpoch'

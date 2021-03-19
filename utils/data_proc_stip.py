@@ -15,7 +15,7 @@ all_view_skip_list = ['downtown_ann_1-09-26-2017', 'downtown_ann_2-09-28-2017', 
 data_root = '/vision/group/prolix'
 # input
 # annot_root = os.path.join(data_root, 'annotations')
-annot_root = '/sailhome/agalczak/crossing/datasets/STIP/annotations'
+annot_root = '/sailhome/ajarno/STR-PIP/datasets/STIP/annotations'
 fps20_frames_root = os.path.join(data_root, 'images_20fps')
 fps20_instances_root = os.path.join(data_root, 'instances_20fps/stip_instances/')
 # map12to20_root = os.path.join(data_root, 'mapping_12_to_20')
@@ -444,9 +444,9 @@ def prepare_split_tmp():
 if __name__ == '__main__':
   if False:
     # test
-    fsegm = '/sailhome/agalczak/crossing/datasets/JAAD_instance_segm/video_0131/00000001_segm.npy'
+    fsegm = '/sailhome/ajarno/STR-PIP/datasets/JAAD_instance_segm/video_0131/00000001_segm.npy'
     parse_objs(fsegm)
-    # fxml = '/sailhome/bingbin/crossing/datasets/JAAD_dataset/behavioral_data_xml/video_0001.xml'
+    # fxml = '/sailhome/bingbin/STR-PIP/datasets/JAAD_dataset/behavioral_data_xml/video_0001.xml'
     # fpos = '/vision2/u/caozj/datasets/JAAD_dataset/bounding_box_python/vbb_part/video_0001.npy'
     # parse_pedestrian(fxml, fpos)
 

@@ -25,11 +25,11 @@ predict=1
 pred_seq_len=30
 predict_k=0
 
-annot_loc_format='/sailhome/agalczak/crossing/datasets/annot_{}_loc.pkl'
+annot_loc_format='/sailhome/ajarno/STR-PIP/datasets/annot_{}_loc.pkl'
 
 load_cache='feats'
-# cache_format='/sailhome/bingbin/crossing/datasets/cache/JAAD_conv_feats/concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt4_posNone_branchboth_collapse0_combinepair_cacheMasks_fixGRU_eval3_9acts_noAct_sanityWithPose_withReLU_pedGRU/{}/ped{}_fid{}.pkl'
-cache_format='/sailhome/bingbin/crossing/datasets/cache/jaad_loc/JAAD_conv_feats/loc_concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt1_posNone_branchboth_collapse0_combinepair_tmp/{}/vid{}_fid{}.pkl'
+# cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt4_posNone_branchboth_collapse0_combinepair_cacheMasks_fixGRU_eval3_9acts_noAct_sanityWithPose_withReLU_pedGRU/{}/ped{}_fid{}.pkl'
+cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_loc/JAAD_conv_feats/loc_concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt1_posNone_branchboth_collapse0_combinepair_tmp/{}/vid{}_fid{}.pkl'
 
 use_gru=1
 use_trn=0

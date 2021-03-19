@@ -34,7 +34,7 @@ def parse_split(fannot_in, fannot_out):
 
 
 def parse_split_wrapper():
-  annot_root = '/sailhome/agalczak/crossing/datasets'
+  annot_root = '/sailhome/ajarno/STR-PIP/datasets'
 
   # ftrain = 'annot_train_ped_withTag_sanityWithPose.pkl'
   # annot_train = os.path.join(annot_root, ftrain)

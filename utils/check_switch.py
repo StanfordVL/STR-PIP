@@ -15,7 +15,7 @@ def find_segments(labels):
   print('# avg frames:', np.mean(durs))
 
 def find_segments_wrapper():
-  ckpt_dir = '/sailhome/bingbin/crossing/ckpts/JAAD/'
+  ckpt_dir = '/sailhome/bingbin/STR-PIP/ckpts/JAAD/'
   ckpt_name = 'graph_gru_seq30_pred30_lr1.0e-05_wd1.0e-05_bt16_posNone_branchped_collapse0_combinepair_adjTypeembed_nLayers2_v2Feats'
   label_name = 'label_epochbest_det_stepall.pkl'
   fpkl = os.path.join(ckpt_dir, ckpt_name, label_name)

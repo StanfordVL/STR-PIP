@@ -1,7 +1,7 @@
 import os
 import torch
 
-ckpt_root = '/sailhome/bingbin/crossing/ckpts/'
+ckpt_root = '/sailhome/bingbin/STR-PIP/ckpts/'
 dataset = 'JAAD'
 
 def check(ckpt, ptype='pred'):

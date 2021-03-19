@@ -15,7 +15,7 @@ pred_seq_len=2
 slide=0
 rand_test=1
 log_every=10
-ckpt_dir='/sailhome/bingbin/crossing/ckpts'
+ckpt_dir='/sailhome/bingbin/STR-PIP/ckpts'
 dataset='STIP'
 
 split='test'

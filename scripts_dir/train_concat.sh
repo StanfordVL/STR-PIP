@@ -20,10 +20,10 @@ predict=1
 pred_seq_len=30
 predict_k=0
 
-annot_ped_format='/sailhome/agalczak/crossing/datasets/annot_{}_ped_withTag_sanityWithPose.pkl'
+annot_ped_format='/sailhome/ajarno/STR-PIP/datasets/annot_{}_ped_withTag_sanityWithPose.pkl'
 
 load_cache='masks'
-cache_format='/sailhome/agalczak/crossing/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
+cache_format='/sailhome/ajarno/STR-PIP/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
 save_cache_format=$cache_format
 
 use_gru=1

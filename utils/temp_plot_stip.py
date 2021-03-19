@@ -13,7 +13,7 @@ MIX = True
 
 fpkls = []
 
-ckpt_root = '/sailhome/bingbin/crossing/ckpts/STIP/'
+ckpt_root = '/sailhome/bingbin/STR-PIP/ckpts/STIP/'
 
 # best proposed
 

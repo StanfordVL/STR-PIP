@@ -30,12 +30,12 @@ branch='both'
 collapse_cls=0
 combine_method='pair'
 
-annot_loc_format='/sailhome/bingbin/crossing/datasets/annot_{}_loc.pkl'
+annot_loc_format='/sailhome/bingbin/STR-PIP/datasets/annot_{}_loc.pkl'
 
 load_cache='masks'
 # load_cache='none'
 
-cache_format='/sailhome/bingbin/crossing/datasets/cache/jaad_loc/{}/ped{}_fid{}.pkl'
+cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_loc/{}/ped{}_fid{}.pkl'
 save_cache_format=$cache_format
 
 ckpt_name='loc_concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt1_posNone_branchboth_collapse0_combinepair_tmp'
@@ -48,7 +48,7 @@ which_epoch=-1
 
 if [ "$mode" = "extract" ]
 then
-  extract_feats_dir='/sailhome/bingbin/crossing/datasets/cache/jaad_loc/JAAD_conv_feats/'$ckpt_name'/'$split'/'
+  extract_feats_dir='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_loc/JAAD_conv_feats/'$ckpt_name'/'$split'/'
 else
   extract_feats_dir='none_existent'
 fi
