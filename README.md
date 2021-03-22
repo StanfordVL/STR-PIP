@@ -1,7 +1,4 @@
 # Spatiotemporal Relationship Reasoning for Pedestrian Intent Prediction (STR-PIP)
-_Department of Computer Science, Stanford University_
-
-_Toyota Research Institute_
 
 **_Paper: https://arxiv.org/pdf/2002.08945.pdf_**
 
