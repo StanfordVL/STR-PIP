@@ -5,7 +5,7 @@ _Toyota Research Institute_
 
 **_Paper: https://arxiv.org/pdf/2002.08945.pdf_**
 
-
+```
 @inproceeding{liu2020spatiotemporal,
    title={Spatiotemporal Relationship Reasoning for Pedestrian Intent Prediction},
    author={Bingbin Liu and Ehsan Adeli and Zhangjie Cao and Kuan-Hui Lee and Abhijeet Shenoi and Adrien Gaidon and Juan Carlos Niebles},
@@ -13,7 +13,7 @@ _Toyota Research Institute_
    booktitle={IEEE Robotics and Automation Letters (IEEE RA-L) and International Conference on Robotics and Automation (ICRA)},
    publisher={IEEE}
 }
-
+```
 
 ## Abstract 
 <img width="844" alt="Screen Shot 2021-03-14 at 3 58 00 AM" src="https://stip.stanford.edu/images/teaser.gif"></img>
