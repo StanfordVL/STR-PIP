@@ -169,7 +169,7 @@ class JAADDataset(data.Dataset):
           ped_crop, cls_masks = self.get_ped_fid(ped, fid, idx)
           ped_crops += ped_crop,
           all_masks += cls_masks,
-          if type(cks_masks) == dict:
+          if type(cls_masks) == dict:
             n_objs = len([each for val in cls_masks.values() for each in val])
           else:
             n_objs = len(cls_masks)
