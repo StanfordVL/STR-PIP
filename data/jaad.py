@@ -1,20 +1,29 @@
 import os
-from glob import glob
-import numpy as np
-import pickle
 import cv2
+import pickle
+import numpy as np
 import random
 random.seed(2019)
-import torch
-import torch.utils.data as data
-import torchvision.transforms as transforms
 
 import pdb
 import time
+import torch
+from glob import glob
+import torch.utils.data as data
+import torchvision.transforms as transforms
 
 from utils.data_proc import parse_objs
 
+
 class JAADDataset(data.Dataset):
+  """
+  Joint Attention in Autonomous Driving (JAAD) Dataset:
+
+  JAAD is a dataset for studying joint attention in the context of autonomous driving. The focus
+  is on pedestrian and driver behaviors at the point of crossing and factors that influence them.
+  To this end, JAAD dataset provides a richly annotated collection of 346 short video clips
+  (5-10 sec long) extracted from over 240 hours of driving footage.
+  """
   def __init__(self, opt):
     # annot_ped_format, is_train, split,
     # seq_len, ped_crop_size, mask_size, collapse_cls,
@@ -60,7 +69,7 @@ class JAADDataset(data.Dataset):
 
     ped = self.peds[idx]
     if self.use_pose and 'pose' not in ped:
-      idx = random.randint(1, self.__len__()-1) # TODO
+      idx = random.randint(1, self.__len__() - 1)
       return self.__getitem__(idx, fid_start)
 
     if fid_start != -1:
@@ -73,28 +82,26 @@ class JAADDataset(data.Dataset):
 
     if self.is_train or self.rand_test or fid_start != -1:
       if self.predict_k:
-        fids = [min(ped['frame_end']-1, f_start+i) for i in range(self.seq_len)]
-        fids += min(ped['frame_end']-1, f_start+self.seq_len-1+self.predict_k),
+        fids = [min(ped['frame_end'] - 1, f_start + i) for i in range(self.seq_len)]
+        fids += min(ped['frame_end'] - 1, f_start + self.seq_len - 1 + self.predict_k),
       else:
-        fids = [min(ped['frame_end']-1, f_start+i) for i in range(self.all_seq_len)]
+        fids = [min(ped['frame_end'] - 1, f_start + i) for i in range(self.all_seq_len)]
     else:
       fids = range(ped['frame_start'], ped['frame_end'])
 
     GT_act = [ped['act'][fid] for fid in fids]
     GT_act = np.stack(GT_act)
     GT_act = torch.Tensor(GT_act)
-
-    # GT_bbox = [np.array(ped['pos_GT'][fid]).astype(np.float) for fid in fids]
     GT_bbox = [ped['pos_GT'][fid].astype(np.float) if len(ped['pos_GT'][fid]) else np.zeros(4) for fid in fids]
     GT_bbox = np.stack(GT_bbox)
     GT_bbox = torch.Tensor(GT_bbox)
 
     vid = ped['vid']
-    # print(self.cache_obj_bbox_format.format(vid))
     with open(self.cache_obj_bbox_format.format(vid), 'rb') as handle:
       data = pickle.load(handle)
-    obj_cls = [data['obj_cls'][fid] for fid in fids]
-    obj_bbox = [data['obj_bbox'][fid] for fid in fids]
+    print(len(data['obj_cls']), len(data['obj_bbox']), [fid for fid in fids if fid < len(data['obj_cls'])])
+    obj_cls = [data['obj_cls'][fid] for fid in fids if fid < len(data['obj_cls'])]
+    obj_bbox = [data['obj_bbox'][fid] for fid in fids if fid < len(data['obj_bbox'])]
 
     if self.use_pose:
       GT_pose = [ped['pose'][fid] for fid in fids]
@@ -102,7 +109,7 @@ class JAADDataset(data.Dataset):
       for i,each in enumerate(GT_pose):
         if len(each) == 0:
           # pad with 0-speed pose
-          GT_pose[i] = np.zeros([9, 3]) if i==0 else GT_pose[i-1].copy()
+          GT_pose[i] = np.zeros([9, 3]) if i == 0 else GT_pose[i - 1].copy()
 
           # pad with 0s
           # GT_pose[i] = np.zeros([9, 3])
@@ -113,7 +120,7 @@ class JAADDataset(data.Dataset):
       GT_pose = torch.Tensor([0])
 
     # +1 since fid is 0-based while the frame path starts at 1.
-    img_paths = [self.img_path_format.format(ped['vid'], fid+1) for fid in fids]
+    img_paths = [self.img_path_format.format(ped['vid'], fid + 1) for fid in fids]
 
     ret = {
       'GT_act': GT_act,
@@ -133,10 +140,10 @@ class JAADDataset(data.Dataset):
     if self.use_driver:
       frames = []
       for fid in fids:
-        img_path = self.img_path_format.format(ped['vid'], fid+1) # +1 since fid is 0-based while the frame path starts at 1.
+        img_path = self.img_path_format.format(ped['vid'], fid + 1) # +1 since fid is 0-based while the frame path starts at 1.
         img = cv2.imread(img_path)
         img = cv2.resize(img, (224, 224))
-        img = img.transpose((2,0,1))
+        img = img.transpose((2, 0, 1))
         frames += img,
       frames = torch.tensor(frames)
       ret['frames'] = frames
@@ -148,7 +155,7 @@ class JAADDataset(data.Dataset):
     if self.load_cache == 'masks':
       for i,fid in enumerate(fids):
         # NOTE: fid for masks is 1-based.
-        fcache = self.cache_format.format(self.split, idx, fid+1)
+        fcache = self.cache_format.format(self.split, idx, fid + 1)
         # print(fcache)
         if os.path.exists(fcache):
           with open(fcache, 'rb') as handle:
@@ -169,13 +176,14 @@ class JAADDataset(data.Dataset):
           ped_crop, cls_masks = self.get_ped_fid(ped, fid, idx)
           ped_crops += ped_crop,
           all_masks += cls_masks,
-          if type(cks_masks) == dict:
+          if type(cls_masks) == dict:
             n_objs = len([each for val in cls_masks.values() for each in val])
           else:
             n_objs = len(cls_masks)
           if n_objs != len(obj_bbox[i]):
             print('JAAD: n_objs mismatch')
-            pdb.set_trace()
+            print(fid, idx, n_objs, len(obj_bbox[i]))
+            print(i, fids)
       ped_crops = np.stack(ped_crops, 0)
       ped_crops = torch.tensor(ped_crops)
 
@@ -202,8 +210,8 @@ class JAADDataset(data.Dataset):
       return ret
 
     elif self.load_cache == 'pos':
-      ret['ped_crops'] = torch.zeros([1,1,512])
-      ret['all_masks'] = torch.zeros([1,1,512])
+      ret['ped_crops'] = torch.zeros([1, 1, 512])
+      ret['all_masks'] = torch.zeros([1, 1, 512])
       return ret
 
     for fid in fids:
@@ -212,11 +220,9 @@ class JAADDataset(data.Dataset):
       all_masks += cls_masks,
 
     # shape: [n_frames, self.ped_crop_size[0], self.ped_crop_size[1]]
-
     ped_crops = np.stack(ped_crops)
     ped_crops = torch.Tensor(ped_crops)
 
-    # print('time per item:', time.time()-t_start)
     ret['ped_crops'] = ped_crops
     ret['all_masks'] = all_masks
     return ret
@@ -226,26 +232,25 @@ class JAADDataset(data.Dataset):
       """
       Prepare ped_crop and obj masks for given ped and fid.
       """
-
       ped_pos = ped['pos_GT'][fid]
       if len(ped_pos) == 0:
         # if no bbox, take the entire frame
-        x,y,w,h = 0,0,-1,-1
+        x, y, w, h = 0, 0, -1, -1
       else:
         x, y, w, h = ped_pos
         x, y, w, h = int(x), int(y), int(w), int(h)
 
       # pedestrian crop
-      img_path = self.img_path_format.format(ped['vid'], fid+1) # +1 since fid is 0-based while the frame path starts at 1.
+      img_path = self.img_path_format.format(ped['vid'], fid + 1) # +1 since fid is 0-based while the frame path starts at 1.
       img = cv2.imread(img_path)
       try:
-        ped_crop = img[y:y+h, x:x+w]
+        ped_crop = img[y:y + h, x:x + w]
       except Exception as e:
         print(e)
         print('img_path:', img_path)
         print('x:{}, y:{}, w:{}, h:{}'.format(x, y, w, h))
       ped_crop = cv2.resize(ped_crop, self.ped_crop_size)
-      ped_crop = ped_crop.transpose((2,0,1))
+      ped_crop = ped_crop.transpose((2, 0, 1))
       
       # obj masks
       fsegm = self.fsegm_format.format(ped['vid'], fid)
@@ -269,7 +274,6 @@ class JAADDataset(data.Dataset):
             mask = mask[y_min:y_max+1, x_min:x_max+1]
           mask = cv2.resize(mask, self.mask_size)
           mask = torch.tensor(mask)
-          # mask = torch.stack([mask, mask, mask])
           if self.collapse_cls:
             cls_masks += mask,
           else:
@@ -298,7 +302,7 @@ class JAADDataset(data.Dataset):
             cls_masks = torch.zeros([0, self.mask_size[0], self.mask_size[1]])
 
       # NOTE: used to be 'self.save_cache_format'
-      if self.cache_format:
+      if self.cache_format and False:
         with open(self.cache_format.format(self.split, idx, fid+1), 'wb') as handle:
           cache = {
             'ped_crops': ped_crop,
@@ -307,5 +311,3 @@ class JAADDataset(data.Dataset):
           pickle.dump(cache, handle)
 
       return ped_crop, cls_masks
-
-

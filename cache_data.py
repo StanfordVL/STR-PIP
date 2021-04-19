@@ -1,18 +1,16 @@
 # python imports
 import os
 import sys
-from glob import glob
-import pickle
+import pdb
 import time
+import pickle
 import numpy as np
-
+from glob import glob
 
 # local imports
 import data
 import utils
 from utils.data_proc import parse_objs
-
-import pdb
 
 
 def cache_masks():
@@ -22,16 +20,14 @@ def cache_masks():
   cache_dir_name = 'jaad_collapse{}'.format('_'+opt.combine_method if opt.combine_method else '')
   data.cache_all_objs(opt, cache_dir_name)
 
-
 def cache_crops():
-  fnpy_root = '/sailhome/bingbin/STR-PIP/datasets/JAAD_instance_segm'
-  fpkl_root = '/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_instance_crops'
+  fnpy_root = '/sailhome/ajarno/STR-PIP/datasets/JAAD_instance_segm'
+  fpkl_root = '/sailhome/ajarno/STR-PIP/datasets/cache/JAAD_instance_crops'
   utils.get_obj_crops(fnpy_root, fpkl_root)
 
 def add_obj_bbox():
-  fnpy_root = '/sailhome/bingbin/STR-PIP/datasets/JAAD_instance_segm'
-  # fpkl_root = '/sailhome/bingbin/STR-PIP/datasets/cache/jaad_collapse'
-  fobj_root = '/sailhome/bingbin/STR-PIP/datasets/cache/obj_bbox'
+  fnpy_root = '/vision/u/ajarno/instance_results'
+  fobj_root = '/sailhome/ajarno/STR-PIP/datasets/cache/obj_bbox'
   os.makedirs(fobj_root, exist_ok=True)
   dir_vids = sorted(glob(os.path.join(fnpy_root, 'vid*')))
 
@@ -82,10 +78,10 @@ def add_obj_bbox():
         with open(fbbox, 'wb') as handle:
           pickle.dump(dobjs, handle)
 
-  if False:
+  if True:
     vids_train = dir_vids[:250]
     helper(vids_train, 'train')
-  if True:
+  if False:
     vids_test = dir_vids[250:]
     helper(vids_test, 'test')
 
@@ -93,10 +89,9 @@ def merge_and_flat(vrange):
   """
   Merge fids in a vid and flatten the classes
   """
-  pkl_in_root = '/sailhome/bingbin/STR-PIP/datasets/cache/obj_bbox'
-  pkl_out_root = '/sailhome/bingbin/STR-PIP/datasets/cache/obj_bbox_merged'
+  pkl_in_root = '/sailhome/ajarno/STR-PIP/datasets/cache/obj_bbox'
+  pkl_out_root = '/sailhome/ajarno/STR-PIP/datasets/cache/obj_bbox_merged'
   os.makedirs(pkl_out_root, exist_ok=True)
-  # for vid in range(1, 347):
   for vid in vrange:
     fpkls = sorted(glob(os.path.join(pkl_in_root, 'vid{:08d}*pkl'.format(vid))))
     print(vid, len(fpkls))
@@ -128,12 +123,6 @@ def merge_and_flat(vrange):
 
 if __name__ == '__main__':
   # cache_masks()
-  cache_crops()
+  # cache_crops()
   add_obj_bbox()
-
-  # merge_and_flat(range(1, 200))
-  # merge_and_flat(range(100, 200))
-  # merge_and_flat(range(200, 300))
-  # merge_and_flat(range(100, 347))
   merge_and_flat(range(1, 347))
-

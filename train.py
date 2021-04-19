@@ -1,18 +1,16 @@
 import os
-import numpy as np
-import pickle
+import pdb
 import copy
-import sys, traceback, code
 import torch
+import wandb
+import pickle
+import numpy as np
+import sys, traceback, code
 
 import data
-import models
 import utils
+import models
 from test import evaluate
-
-import pdb
-
-import wandb
 
 N_EVAL_EPOCHS = 3
 
@@ -62,7 +60,6 @@ train_loader = data.get_data_loader(opt)
 print('Train dataset: {}'.format(len(train_loader.dataset)))
 
 # val
-# val_opt = copy.deepcopy(opt)
 val_opt, _ = utils.build(is_train=False)
 val_opt.split = 'test'
 val_opt.slide = 0
@@ -113,10 +110,8 @@ def train():
   
     losses = []
     for step, data in enumerate(train_loader):
-      # break
       if epoch == 0:
         torch.cuda.empty_cache()
-        # break
       loss = model.step_train(data)
       losses += loss,
 
@@ -167,7 +162,6 @@ def train():
           'eval_acc_cross_last':eval_acc_cross, 'eval_acc_non_cross_last':eval_acc_non_cross,
           'eval_loss_last':eval_loss,
           'best_eval_acc_last': best_eval_acc_last, 'best_eval_loss_last':best_eval_loss_last, 'best_epoch_last':best_epoch_last})
-
   
     # Save model checkpoints
     if (epoch + 1) % opt.save_every == 0 and epoch >= 0 or epoch == opt.n_epochs - 1:

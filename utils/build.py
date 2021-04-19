@@ -1,7 +1,7 @@
-import numpy as np
 import os
-import random
 import torch
+import random
+import numpy as np
 
 import args
 from .logger import Logger

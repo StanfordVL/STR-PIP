@@ -1,8 +1,7 @@
 import os
-from glob import glob
-import pickle
-
 import pdb
+import pickle
+from glob import glob
 
 data_root = '/sailhome/ajarno/STR-PIP/datasets/'
 img_root = os.path.join(data_root, 'JAAD_dataset/JAAD_clip_images')
@@ -16,7 +15,6 @@ def count_frames():
 
   print('total # frames:', sum(cnts))
   print('cnts: max={} / min={} / mean={}'.format(max(cnts), min(cnts), sum(cnts)/len(cnts)))
-  # pdb.set_trace()
 
 def ped_count_crossing():
   def helper(ped):
@@ -93,8 +91,6 @@ def loc_count_ped():
   n_peds = train_n_peds + test_n_peds
   print('\ntotal:')
   print('  max:{} / min:{} / mean:{}'.format(max(n_peds), min(n_peds), sum(n_peds)/len(n_peds)))
-
-
 
 
 if __name__ == '__main__':

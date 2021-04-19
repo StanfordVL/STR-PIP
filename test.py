@@ -1,14 +1,13 @@
 import os
-import numpy as np
-import pickle
-import sys, traceback, code
+import pdb
 import torch
+import pickle
+import numpy as np
+import sys, traceback, code
 
 import data
 import models
 import utils
-
-import pdb
 
 
 def evaluate(model, dloader, opt, n_eval_epochs=3):
@@ -210,7 +209,6 @@ def extract_feats_loc(model, dloader, extract_feats_dir, seq_len=1):
 
       item = dloader.dataset.__getitem__(vid, fid_start=fid)
       ped_crops, masks, act = item['ped_crops'], item['all_masks'], item['GT_act']
-      # print('masks[0][1]:', masks[0][1].shape)
       ped_feats, ctxt_feats, ctxt_cls = model.extract_feats(ped_crops, masks)
       
       with open(feat_path, 'wb') as handle:

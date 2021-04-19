@@ -24,10 +24,7 @@ cache_obj_bbox_format='/vision/group/prolix/processed/obj_bbox_20fps_merged/{}_s
 cache_obj_bbox_format_left='/vision/group/prolix/processed/left/obj_bbox_20fps_merged/{}_seg{}.pkl'
 cache_obj_bbox_format_right='/vision/group/prolix/processed/right/obj_bbox_20fps_merged/{}_seg{}.pkl'
 
-# load_cache='none'
 load_cache='mask'
-# cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
-#cache_format='/vision/group/prolix/processed/cache/{}/ped{}_fid{}.pkl'
 cache_format=/dev/null
 save_cache_format=$cache_format
 
@@ -45,7 +42,6 @@ combine_method='pair'
 suffix='_decay10_tmp'
 ckpt_name='branch'$branch'_collapse'$collapse_cls'_combine'$combine_method$suffix
 
-# CUDA_VISIBLE_DEVICES=$gpu_id python3 -m train.py \
 WANDB_MODE=dryrun CUDA_VISIBLE_DEVICES=$gpu_id python -m train.py \
   --model='concat' \
   --split=$split \

@@ -1,5 +1,5 @@
-import argparse
 import os
+import argparse
 from datetime import datetime
 
 
@@ -78,16 +78,15 @@ class BaseArgs:
     self.parser.add_argument('--split', type=str, required=True)
     self.parser.add_argument('--dset-name', type=str, default='JAAD')
     self.parser.add_argument('--annot-ped-format', type=str,
-                             # default='/sailhome/bingbin/STR-PIP/datasets/annot_{}_ped.pkl',
-                             default='/sailhome/ajarno/STR-PIP/datasets/annot_{}_ped_withTag_sanityWithPose.pkl',
+                             default='/sailhome/ajarno/STR-PIP/datasets/annot_{}_ped_withTag_sanityNoPose.pkl',
                              help='Format for the pkl file for parsed pedestrian annotations.')
     self.parser.add_argument('--annot-loc-format', type=str,
                              default='/sailhome/ajarno/STR-PIP/datasets/annot_{}_loc.pkl',
                              help='Format for the pkl file for parsed location-centric annotations.')
     self.parser.add_argument('--img-path-format', type=str,
-                             default='/sailhome/ajarno/STR-PIP/datasets/JAAD_dataset/JAAD_clip_images/video_{:04d}.mp4/{:d}.jpg')
+                             default='/vision/u/ajarno/JAAD_clip_images/video_{:04d}/{:05d}.png')
     self.parser.add_argument('--fsegm-format', type=str,
-                             default='/sailhome/ajarno/STR-PIP/datasets/JAAD_instance_segm/video_{:04d}/{:08d}_segm.npy')
+                             default='/vision/u/ajarno/instance_results/video_{:04d}/{:08d}_segm.npy')
     # self.parser.add_argument('--fsegm-format-left', type=str, default='')
     # self.parser.add_argument('--fsegm-format-right', type=str, default='')
     self.parser.add_argument('--driver-act-format', type=str,
@@ -123,9 +122,11 @@ class BaseArgs:
 
 
   def parse(self):
+    """
+    Parses given command line arguments, converts them into objects, and returns 
+    a Namespace object containing with these arguments assigned as attributes.
+    """
     opt, _ = self.parser.parse_known_args()
-    print("I AM HERE")
-    # opt.is_train, opt.split = self.is_train, self.split
     opt.is_train = self.is_train
     if opt.is_train:
       if opt.model == 'ConcatModel':

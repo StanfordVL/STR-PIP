@@ -1,12 +1,12 @@
 import os
+import pdb
 from glob import glob
 import numpy as np
-import pickle
 import cv2
+import pickle
 import xml.etree.ElementTree as ET
 from pycocotools import mask as maskUtils
 
-import pdb
 
 # Objects of interest
 cls_map = {
@@ -48,9 +48,11 @@ cls_map_small = {
 
 
 def parse_objs(fnpy):
-  # Parse instance segmentations on one frame to masks.
-  # In: filename of instance segmentation (i.e. `dataset/JAAD_instance_segm/video_{:04d}/{:08d}_segm.npy`)
-  # Out: dict with key 1-4 (see `cls_map`), each for a type of graph nodes.
+  """
+  Parse instance segmentations on one frame to masks.
+  In: filename of instance segmentation (i.e. `dataset/JAAD_instance_segm/video_{:04d}/{:08d}_segm.npy`)
+  Out: dict with key 1-4 (see `cls_map`), each for a type of graph nodes.
+  """
   segms = np.load(fnpy, allow_pickle=True)
 
   selected_segms = {}
@@ -138,7 +140,7 @@ joint_ids = [
 
 def parse_pedestrian(fxml, fpos_GT, fpos_pred='', fpose=''):
   """
-  parse xml (action label)
+  Parses xml file (action label)
   """
   e = ET.parse(fxml).getroot()
   # peds: dict of id to a list of per-frame acts.
@@ -229,21 +231,17 @@ def parse_pedestrian(fxml, fpos_GT, fpos_pred='', fpose=''):
 
 def prepare_data():
   # object GT directory
-  obj_root = '/sailhome/ajarno/STR-PIP/datasets/JAAD_instance_segm'
+  obj_root = '/vision/u/ajarno/instance_results'
   fobj_dir_format = os.path.join(obj_root, 'video_{:04d}')
   # pedestrian GT files
-  #ped_root = '/sailhome/ajarno/STR-PIP/datasets/JAAD_dataset/'
   ped_root = '/vision/u/caozj1995/data/JAAD_dataset/'
   fxml_format = os.path.join(ped_root, 'behavioral_data_xml', 'video_{:04d}.xml')
   fpose_format = os.path.join('/vision2/u/mangalam/JAAD/openpose_track_with_pose/', 'video_{:04d}.npy')
   fpos_GT_format = os.path.join(ped_root, 'bounding_box_python', 'vbb_part', 'video_{:04d}.npy')
 
   def prepare_split(vid_range):
-    
     all_peds = []
     for vid in vid_range:
-      # print(vid)
-
       if True:
         # objects
         fobj_dir = fobj_dir_format.format(vid)
@@ -254,7 +252,6 @@ def prepare_data():
         for fid,fsegm in enumerate(fsegms):
           print('fid:', fid)
           frame_objs += parse_objs(fsegm),
-
         print('Finished objectS')
   
       if True:
@@ -294,7 +291,6 @@ def prepare_data():
   print('Testing data ready.\n')
 
  
-
 if __name__ == '__main__':
   if False:
     # test

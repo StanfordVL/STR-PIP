@@ -1,35 +1,19 @@
-# NOTE: this script uses segmentation files only
-# and does not rely on pedestrian annotations.
+# NOTE: this script uses segmentation files only and does not rely on pedestrian annotations.
 
 # python imports
 import os
 import sys
-from glob import glob
-import pickle
+import pdb
 import time
+import pickle
 import numpy as np
-
+from glob import glob
 
 # local imports
 import data
 import utils
 from utils.data_proc_stip import parse_objs
 
-import pdb
-
-
-# def cache_masks():
-#   opt, logger = utils.build(is_train=False)
-#   opt.combine_method = ''
-#   opt.split = 'train'
-#   cache_dir_name = 'jaad_collapse{}'.format('_'+opt.combine_method if opt.combine_method else '')
-#   data.cache_all_objs(opt, cache_dir_name)
-# 
-# 
-# def cache_crops():
-#   fnpy_root = '/sailhome/bingbin/STR-PIP/datasets/JAAD_instance_segm'
-#   fpkl_root = '/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_instance_crops'
-#   utils.get_obj_crops(fnpy_root, fpkl_root)
 
 def add_obj_bbox(view=''):
   if not view:
@@ -65,8 +49,6 @@ def add_obj_bbox(view=''):
             sys.stdout.flush()
           fid = os.path.basename(fsegm).split('_')[0]
           fbbox = os.path.join(fobj_root, '{:s}_seg{:s}_fid{:s}.pkl'.format(dir_vid, os.path.basename(seg), fid))
-          # if 'ANN_conor1_seg12:22--12:59_fid0000015483.pkl' not in fbbox:
-          #   continue
           if os.path.exists(fbbox):
             continue
           if not os.path.exists(fsegm):
@@ -105,10 +87,6 @@ def add_obj_bbox(view=''):
   vids_test = ['downtown_ann_3-09-28-2017', 'downtown_palo_alto_6', 'dt_san_jose_4', 'mountain_view_4', 
   'sf_soma_2']
   vids_train = [vid for vid in vids if vid not in vids_test]
-
-  # tmp
-  # vids_train = ['downtown_ann_1-09-27-2017', 'downtown_ann_2-09-27-2017', 'downtown_ann_3-09-27-2017', 'downtown_ann_1-09-28-2017']
-  # vids_test = []
 
   if True:
     helper(vids_train, 'train')
@@ -173,10 +151,6 @@ def merge_and_flat_wrapper(view=''):
   vids_test = ['downtown_ann_3-09-28-2017', 'downtown_palo_alto_6', 'dt_san_jose_4', 'mountain_view_4', 
   'sf_soma_2']
   vids_train = [vid for vid in vids if vid not in vids_test]
-
-  # tmp
-  # vids_train = ['downtown_ann_1-09-27-2017', 'downtown_ann_2-09-27-2017', 'downtown_ann_3-09-27-2017', 'downtown_ann_1-09-28-2017']
-  # vids_test = []
 
   if True:
     merge_and_flat(vids_train, view=view)

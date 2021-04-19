@@ -1,13 +1,13 @@
 import os
 import sys
+import torch
+import argparse
 import numpy as np
 from PIL import Image
-import torch
 torch.manual_seed(2019)
 torch.cuda.manual_seed_all(2019)
 import torch.utils.data as data
 import torchvision.transforms as transforms
-import argparse
 
 import time
 import pdb
@@ -167,7 +167,7 @@ def get_data_loader(opt):
     collate_fn = stip_collate
 
   else:
-    raise NotImplementedError('Sorry but we currently only support JAAD. ^ ^b')
+    raise NotImplementedError('Sorry but we currently only support JAAD and STIP. ^ ^b')
 
   dloader = data.DataLoader(dset,
     batch_size=opt.batch_size,
@@ -224,6 +224,7 @@ if __name__ == '__main__':
   parser.add_argument('--cache-format', type=str, default='')
   parser.add_argument('--batch-size', type=int, default=4)
   parser.add_argument('--n-workers', type=int, default=0)
+  
   # added to test loader
   parser.add_argument('--rand-test', type=int, default=1)
   parser.add_argument('--predict', type=int, default=0)
@@ -242,12 +243,6 @@ if __name__ == '__main__':
   if True:
     # test dloader
     dloader = get_data_loader(opt)
-
-    # for i,eg in enumerate(dloader):
-    #   if i%100 == 0:
-    #     print(i)
-    #     sys.stdout.flush()
-
     for i,vid in enumerate(dloader.dataset.vids):
       print('vid:', vid)
       annot = dloader.dataset.annots[vid]

@@ -31,26 +31,22 @@ branch='both'
 collapse_cls=0
 combine_method='pair'
 
-
 annot_ped_format='/vision/group/prolix/processed/pedestrians/{}.pkl'
 cache_obj_bbox_format='/vision/group/prolix/processed/obj_bbox_20fps_merged/{}_seg{}.pkl'
-
 
 load_cache='masks'
 
 cache_format='/vision/group/prolix/processed/cache/{}/ped{}_fid{}.pkl'
 save_cache_format=$cache_format
 
-# ckpt_name='concat_gru_seq8_pred2_lr1.0e-04_wd1.0e-05_bt2_posNone_branchboth_collapse0_combinepair_testANN_hanh1'
-
-# ckpt_name='concat_gru_seq8_pred2_lr1.0e-04_wd1.0e-05_bt2_posNone_branchboth_collapse0_combinepair_run1'
-
 ckpt_name='concat_gru_seq8_pred2_lr1.0e-05_wd1.0e-05_bt2_posNone_branchboth_collapse0_combinepair_decay10'
+
 # -1 for the best epoch
 which_epoch=-1
 
 # this is to set a non-existent epoch s.t. the features are extracted from ImageNet backbone
 # which_epoch=100
+
 
 if [ $which_epoch -eq -1 ]
 then

@@ -1,7 +1,9 @@
 from .base_args import BaseArgs
 
-
 class TestArgs(BaseArgs):
+  """
+  Defines base arguments for Model Testing
+  """
   def __init__(self):
     super(TestArgs, self).__init__()
 
@@ -20,6 +22,3 @@ class TestArgs(BaseArgs):
                              help="Whether to collect weight matrices in the graph model.")
     self.parser.add_argument('--save-As-format', type=str, default="",
                              help="Path to saved weight matrices.")
-    # self.parser.add_argument('--rand-loader', type=int, default=0,
-    #                          help="Whether to randomize the data loader.")
-

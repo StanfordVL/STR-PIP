@@ -1,20 +1,29 @@
 import os
+import cv2
+import pickle
 from glob import glob
 import numpy as np
-import pickle
-import cv2
 import random
 random.seed(2019)
+
+import pdb
+import time
 import torch
 import torch.utils.data as data
 import torchvision.transforms as transforms
 
-import pdb
-import time
-
 from utils.data_proc import parse_objs
 
+
 class STIPDataset(data.Dataset):
+  """
+  Stanford-TRI Intention Prediction (STIP) Dataset:
+
+  STIP includes over 900 hours of driving scene videos of front, right, and left cameras,
+  while the vehicle was driving in dense areas of five cities in the United States. The 
+  videos were annotated at 2fps with pedestrian bounding boxes and labels of crossing/not-crossing 
+  the street, which are respectively shown with green/red boxes in the above videos.
+  """
   def __init__(self, opt):
     # annot_ped_format, is_train, split,
     # seq_len, ped_crop_size, mask_size, collapse_cls,
@@ -90,11 +99,6 @@ class STIPDataset(data.Dataset):
     return len(self.idx_map)
 
   def __getitem__(self, idx, fid_start=-1):
-    # idx = self.keys[idx]
-    
-    # if self.split == 'test' and self.view == 'all' and idx == 0:
-    #   return None
-
     t_start = time.time()
 
     pid = self.idx_map[idx]
@@ -116,7 +120,7 @@ class STIPDataset(data.Dataset):
     # indices relative to ped['fid20s']
     fids_rel = None
     ped['fids20'] = ped['old_fid20s'] # TODO: tmp fix
-    ped['fids20'] = sorted(ped['fids20']) # TODO: why are the fids not sorted originally?
+    ped['fids20'] = sorted(ped['fids20']) # TODO: why are fids not sorted originally
     if self.is_train or self.rand_test or fid_start != -1:
       if self.predict_k:
         fids_rel = [min(len(ped['fids20'])-1, f_start_rel+i) for i in range(self.seq_len)]
@@ -129,7 +133,6 @@ class STIPDataset(data.Dataset):
     GT_act = np.stack(GT_act)
     GT_act = torch.Tensor(GT_act)
     GT_act = GT_act.unsqueeze(-1)
-
     GT_bbox = [ped['pos_GT'][fid].astype(np.float) if len(ped['pos_GT'][fid]) else np.zeros(4) for fid in fids_rel]
     GT_bbox = np.stack(GT_bbox)
     GT_bbox = torch.Tensor(GT_bbox)
@@ -153,26 +156,11 @@ class STIPDataset(data.Dataset):
       GT_pose = torch.Tensor([0])
 
     # TODO: merge the bboxes
-
-    # fbbox = self.cache_obj_bbox_format.format(vid, ped['seg'])
-    # with open(fbbox, 'rb') as handle:
-    #   bbox_data = pickle.load(handle)
-    #   # obj_cls += data['obj_cls'],
-    #   # obj_bbox += data['obj_bbox'],
-
-    # cache_map = {'c': self.cache_obj_bbox_format}
-    # if self.cache_obj_bbox_format_left:
-    #   cache_map['l'] = self.cache_obj_bbox_format_left
-    # if self.cache_obj_bbox_format_right:
-    #   cache_map['r'] = self.cache_obj_bbox_format_right
-
     obj_cls, obj_bbox = [], []
     fbbox = self.cache_obj_bbox_format.format(vid, ped['seg'])
     if not os.path.exists(fbbox):
       print('Path does not exist:{}. \n Skipping...'.format(fbbox))
       return None
-
-    # pdb.set_trace()
 
     with open(fbbox, 'rb') as handle:
       bbox_data = pickle.load(handle)
@@ -180,8 +168,6 @@ class STIPDataset(data.Dataset):
       fid_rel_seg = ped['map20fpsToRel'][ped['fids20'][fid]]
       obj_cls += bbox_data['obj_cls'][fid_rel_seg],
       obj_bbox += bbox_data['obj_bbox'][fid_rel_seg],
-    # obj_cls = [bbox_data['obj_cls'][fid] for fid in fids_rel]
-    # obj_bbox = [bbox_data['obj_bbox'][fid] for fid in fids_rel]
 
     img_paths = [self.img_path_format.format(ped['vid'], ped['seg'], ped['fids20'][fid]) for fid in fids_rel]
 
@@ -191,8 +177,6 @@ class STIPDataset(data.Dataset):
       'GT_pose': GT_pose,
       'obj_cls': obj_cls,
       'obj_bbox': obj_bbox,
-      # 'obj_cls': obj_cls,
-      # 'obj_bbox': obj_bbox,
       'fids': torch.tensor(np.array(fids_rel)),
       'img_paths': img_paths,
     }
@@ -207,7 +191,7 @@ class STIPDataset(data.Dataset):
         img_path = self.img_path_format.format(ped['vid'], ped['seg'], fid) # +1 since fid is 0-based while the frame path starts at 1.
         img = cv2.imread(img_path)
         img = cv2.resize(img, (224, 224))
-        img = img.transpose((2,0,1)) # i.e. img size = (3, 224, 224)
+        img = img.transpose((2, 0, 1)) # i.e. img size = (3, 224, 224)
         frames += img,
       frames = torch.tensor(frames)
       ret['frames'] = frames
@@ -216,11 +200,6 @@ class STIPDataset(data.Dataset):
       for i,fid in enumerate(fids_rel):
         # NOTE: fid for masks is 1-based.
         fcache = self.cache_format.format(self.split, pid, ped['fids20'][fid])
-
-        # if not os.path.exists(fcache):
-        #   # some frames are missing in side views
-        #   self.invalid_pid += pid,
-        #   return None
 
         if os.path.exists(fcache):
           # Load cache if file exists.
@@ -263,7 +242,6 @@ class STIPDataset(data.Dataset):
       for fid in fids_rel:
         # NOTE: fid for feats is 0-based.
         fcache = self.cache_format.format(self.split, pid, ped['fids20'][fid])
-        # pdb.set_trace()
         if not os.path.exists(fcache):
           # some frames are missing in side views
           pdb.set_trace()
@@ -276,7 +254,6 @@ class STIPDataset(data.Dataset):
 
           ped_feats += ped_feat,
           ctxt_feats += ctxt_feat,
-          # pdb.set_trace()
       ped_feats = torch.stack(ped_feats, 0)
       
       ret['ped_crops'] = ped_feats
@@ -298,7 +275,6 @@ class STIPDataset(data.Dataset):
     ped_crops = np.stack(ped_crops)
     ped_crops = torch.Tensor(ped_crops)
 
-    # print('time per item:', time.time()-t_start)
     ret['ped_crops'] = ped_crops
     ret['all_masks'] = all_masks
     return ret
@@ -308,11 +284,10 @@ class STIPDataset(data.Dataset):
       """
       Prepare ped_crop and obj masks for given ped and fid.
       """
-
       ped_pos = ped['pos_GT'][fid]
       if len(ped_pos) == 0:
         # if no bbox, take the entire frame
-        x,y,w,h = 0,0,-1,-1
+        x, y, w, h = 0, 0, -1, -1
       else:
         x, y, w, h = ped_pos
         x, y, w, h = max(0, int(x)), max(0, int(y)), int(w), int(h)
@@ -323,14 +298,14 @@ class STIPDataset(data.Dataset):
       # img = cv2.resize(img, (224, 224))
       # img = img.transpose((2,0,1))
       try:
-        ped_crop = img[y:y+h, x:x+w]
+        ped_crop = img[y:y + h, x:x + w]
       except Exception as e:
         print(e)
         print('img_path:', img_path)
         print('x:{}, y:{}, w:{}, h:{}'.format(x, y, w, h))
         peb_crop = np.zeros(img.shape)
       ped_crop = cv2.resize(ped_crop, self.ped_crop_size)
-      ped_crop = ped_crop.transpose((2,0,1))
+      ped_crop = ped_crop.transpose((2, 0, 1))
       
       # obj masks
       fsegm = self.fsegm_format.format(ped['vid'], ped['seg'], ped['fids20'][fid])

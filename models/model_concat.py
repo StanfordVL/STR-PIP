@@ -1,15 +1,12 @@
 import os
+import pdb
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
 import random
 
 from models.backbone.resnet_based import resnet_backbone
-
 from models.model_base import BaseModel
-
-import pdb
 
 
 class ConcatModel(BaseModel):

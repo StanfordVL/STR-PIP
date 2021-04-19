@@ -2,6 +2,9 @@ from .base_args import BaseArgs
 
 
 class TrainArgs(BaseArgs):
+  """
+  Defines base arguments for Model Training
+  """
   def __init__(self):
     super(TrainArgs, self).__init__()
 

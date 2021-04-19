@@ -21,17 +21,7 @@ ckpt_dir='/sailhome/bingbin/STR-PIP/ckpts'
 dataset='JAAD'
 
 # pred 30
-# ckpt_name='graph_gru_seq30_pred30_lr1.0e-05_wd1.0e-05_bt16_posNone_branchped_collapse0_combinepair_adjTypeembed_nLayers2_v2Feats'
-# ckpt_name='graph_gru_seq30_pred30_lr3.0e-04_wd1.0e-05_bt16_posNone_branchboth_collapse0_combinepair_adjTypespatial_nLayers2_v4Feats_pedGRU_3evalEpoch'
-# ckpt_name='graph_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt16_posNone_branchboth_collapse0_combinepair_adjTypespatial_nLayers2_diffW1_v4Feats_pedGRU_3evalEpoch'
-# ckpt_name='graph_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt16_posNone_branchboth_collapse0_combinepair_adjTypespatial_nLayers2_v4Feats_pedGRU_3evalEpoch'
 ckpt_name='graph_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt16_posNone_branchboth_collapse0_combinepair_adjTypespatial_nLayers2_v4Feats_pedGRU_newCtxtGRU_3evalEpoch' # best
-
-# pred 60
-# ckpt_name='graph_gru_seq30_pred60_lr1.0e-04_wd1.0e-05_bt16_posNone_branchboth_collapse0_combinepair_adjTypespatial_nLayers2_diffW0_v4Feats_pedGRU_3evalEpoch'
-
-# pred 90
-# ckpt_name='graph_gru_seq30_pred90_lr1.0e-04_wd1.0e-05_bt16_posNone_branchboth_collapse0_combinepair_adjTypespatial_nLayers2_diffW0_v4Feats_pedGRU_3evalEpoch'
 
 which_epoch=-1
 if [ $which_epoch -eq -1 ]
@@ -45,26 +35,9 @@ save_output_format=$ckpt_dir'/'$dataset'/'$ckpt_name'/output_epoch'$epoch_name'_
 collect_A=1
 save_As_format=$ckpt_dir'/'$dataset'/'$ckpt_name'/test_graph_weights_epoch'$epoch_name'/vid{}_eval{}.pkl'
 
-
-
 load_cache='feats'
-# cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-04_wd1.0e-05_bt4_ped_collapse0_combinepair_useBBox0_cacheMasks_fixGRU_singleTime/{}/ped{}_fid{}.pkl'
 cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_seq30_pred30_lr1.0e-04_wd1.0e-05_bt4_posNone_branchboth_collapse0_combinepair_cacheMasks_fixGRU_eval3_9acts_noAct_sanityWithPose_withReLU_pedGRU/{}/ped{}_fid{}.pkl'
 
-
-# cache_format='/sailhome/bingbin/STR-PIP/datasets/cache/JAAD_conv_feats/concat_gru_lr1.0e-05_bt4_test_epoch5/{}/ped{}_fid{}.pkl'
-
-# ckpt_name='graph_gru_lr1.0e-05_wd1.0e-05_bt16_ped_collapse0_combinepair_adjTypeembed_nLayers0_useBBox0_fixGRU'
-# which_epoch=50
-# 
-# ckpt_name='graph_gru_lr1.0e-05_wd1.0e-05_bt16_ped_collapse0_combinepair_adjTypeembed_nLayers2_useBBox0_fixGRU'
-# which_epoch=22
-# 
-# ckpt_name='graph_gru_lr1.0e-05_wd1.0e-05_bt16_both_collapse0_combinepair_adjTypeembed_nLayers2_useBBox0_fixGRU'
-# which_epoch=38
-# 
-# ckpt_name='graph_gru_lr1.0e-05_wd1.0e-05_bt16_ped_collapse0_combinepair_adjTypeuniform_nLayers0_useBBox0_fixGRU'
-# which_epoch=42
 
 if [ "$mode" = "extract" ]
 then
@@ -143,7 +116,6 @@ CUDA_VISIBLE_DEVICES=$gpu_id python3 test.py \
 exit
 
 # bak of prev command
-
 CUDA_VISIBLE_DEVICES=$gpu_id python3 test.py \
   --model='graph' \
   --split=$split \

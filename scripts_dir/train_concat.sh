@@ -1,7 +1,6 @@
 #!/bin/bash
 #!/usr/bin/env python3
 
-
 gpu_id=0
 split='train'
 n_acts=9
@@ -20,7 +19,7 @@ predict=1
 pred_seq_len=30
 predict_k=0
 
-annot_ped_format='/sailhome/ajarno/STR-PIP/datasets/annot_{}_ped_withTag_sanityWithPose.pkl'
+annot_ped_format='/sailhome/ajarno/STR-PIP/datasets/annot_{}_ped_withTag_sanityNoPose.pkl'
 
 load_cache='masks'
 cache_format='/sailhome/ajarno/STR-PIP/datasets/cache/jaad_collapse_max/{}/ped{}_fid{}.pkl'
@@ -41,7 +40,6 @@ suffix='_cacheMasks_fixGRU_eval3_9acts_noAct_sanityWithPose_withReLU_pedGRU'
 suffix='_test_tmp'
 ckpt_name='branch'$branch'_collapse'$collapse_cls'_combine'$combine_method$suffix
 
-# CUDA_VISIBLE_DEVICES=$gpu_id python3 -m train.py \
 WANDB_MODE=dryrun CUDA_VISIBLE_DEVICES=$gpu_id python3 -m train.py \
   --model='concat' \
   --split=$split \
