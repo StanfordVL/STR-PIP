@@ -71,7 +71,9 @@ cd STR-PIP
 ```
 
 ## Usage
-_TBC_
+Running "scripts_dir/train_concat.sh"
+
+In order to generate "annot_test_ped_withTag_sanityNoPose.pkl", you will need to run utils/data_proc.py. Specifically, we will run the function prepare_data() inside data_proc.py.
 
 
 ## Current code status (3-14-21)
